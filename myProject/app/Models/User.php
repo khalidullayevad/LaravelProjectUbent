@@ -16,13 +16,27 @@ class User extends Authenticatable
      *
      * @var array
      */
+    public function ENT()
+    {
+        return $this->hasOne('App\Models\ENT');
+    }
+    public function Udastac()
+    {
+        return $this->hasOne('App\Models\Udastak');
+    }
+    public function school_certificate()
+    {
+        return $this->hasOne('App\Models\School_certeficate');
+    }
+    public function choice()
+    {
+        return $this->hasOne('App\Models\Choice');
+    }
     protected $fillable = [
         'email',
         'password',
         'gender',
         'full_name',
-
-
     ];
 
     /**
