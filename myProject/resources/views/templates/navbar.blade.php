@@ -6,7 +6,7 @@
         <li><a href="instruction.html">Instruction</a></li>
         <li><a href="contact.html">Contacts</a></li>
         @if(Auth::check())
-        <li><a href="#">{{Auth::user()->getEmailOrName()}}</a></li>
+        <li><a href="{{route('profile')}}">{{Auth::user()->getEmailOrName()}}</a></li>
             <li><a href="{{route('signout')}}">Sign Out</a></li>
 
         @else

@@ -8,8 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class School_certeficate extends Model
 {
     use HasFactory;
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User');
-    }
+    protected $table="school_certeficates";
+    protected $fillable = [
+        'avarage_point',
+        'type',
+        'school_name',
+        'graduation_year',
+        'region',
+        'pdf_sch_cer',
+        'user_id',
+
+    ];
 }

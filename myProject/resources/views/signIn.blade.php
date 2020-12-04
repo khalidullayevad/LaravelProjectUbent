@@ -20,6 +20,7 @@
 
 
 @include('templates/navbar')
+@include('templates/alerts')
 
 
 <section class="form my-4 mx-5">

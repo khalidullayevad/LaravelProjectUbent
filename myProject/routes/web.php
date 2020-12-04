@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfilleController;
+use App\Http\Controllers\DocumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +34,17 @@ Route::post('/signin', [AuthController::class, 'postSignIn']);
 
 Route::get('/signout', [AuthController::class, 'getSignOut'])->name('signout');
 
+
+Route::get('/profile', [ProfilleController::class, 'getProfile'])->name('profile');
+
+Route::post('/editName', [ProfilleController::class, 'postFullNameGenderPhoto']);
+
+Route::post('/editUdastak', [ProfilleController::class, 'postUdastak']);
+
+Route::post('/editSchoolCerteficate', [ProfilleController::class, 'postSchCer']);
+
+Route::post('/editENTCerteficate', [ProfilleController::class, 'postENTCer']);
+
+Route::get('/viewUdastak/{id}',[DocumentController::class,'viewUdastak']);
+
+Route::get('/downloadUdastak/{file}',[DocumentController::class,'dowloadUdastak']);

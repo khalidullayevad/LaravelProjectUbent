@@ -8,8 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class ENT extends Model
 {
     use HasFactory;
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User');
-    }
+    protected $table ='e_n_t_s';
+    protected $fillable = [
+        'reading',
+        'math',
+        'subject_1_name',
+        'subject_2_name',
+        'subject_1_point',
+        'subject_2_point',
+        'tjk',
+        'language',
+        'pdf_ent',
+        'user_id'
+    ];
 }

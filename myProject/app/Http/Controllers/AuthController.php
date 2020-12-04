@@ -14,6 +14,7 @@ class AuthController extends Controller
         return view('signup');
     }
     public function postSignUp(Request  $request){
+
        $this -> validate($request,[
            "email" =>'required|unique:users|email|max:255',
            "password" =>'required|min:6',
@@ -24,8 +25,8 @@ class AuthController extends Controller
            ]
        );
        return redirect()
-           -> route('home')
-           -> with('info','Welcome ');
+           -> route('signin')
+           -> with('info','Success sign up. Please sign in. ');
     }
 
     public function getSignIn(){
@@ -38,9 +39,9 @@ class AuthController extends Controller
         ]);
 
         if(!Auth::attempt($request->only(['email','password']),$request->has('remember'))){
-            return redirect()->back()->with('info', 'Incorrect login or password');
+            return redirect() -> route('signin')->with('info', 'Incorrect login or password');
         }
-        return redirect()->route('home')->with('message', 'Success sign in');
+        return redirect()->route('home')->with('info', 'Success sign in');
     }
 
     public function getSignOut(){
