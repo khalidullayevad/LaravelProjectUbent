@@ -11,7 +11,7 @@
 <section >
 {{--    <iframe src="{{url('img/'.$data->pdf_udastak)}}" style="width: 600px; height: 500px;"></iframe>--}}
     <div style="margin-left: 200px;">
-    <embed src="{{url('img/'.$data->pdf_udastak)}}" width="900px" height="1000" />
+    <embed src="{{url('documents/'.$data->file)}}" width="900px" height="1000" />
     </div>
 </section>
 

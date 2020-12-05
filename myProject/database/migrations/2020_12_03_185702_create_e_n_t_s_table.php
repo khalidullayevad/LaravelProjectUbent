@@ -26,7 +26,7 @@ class CreateENTSTable extends Migration
             $table->integer('total')->nullable();
             $table->string('tjk')->nullable();
             $table->string('language')->nullable();
-            $table->string('pdf_ent')->nullable();
+            $table->string('file')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });

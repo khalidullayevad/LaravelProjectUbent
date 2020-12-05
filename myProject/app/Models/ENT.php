@@ -18,7 +18,7 @@ class ENT extends Model
         'subject_2_point',
         'tjk',
         'language',
-        'pdf_ent',
+        'file',
         'user_id'
     ];
 }

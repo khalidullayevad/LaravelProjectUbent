@@ -21,6 +21,16 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('gender')->nullable();
             $table->string('photo')->nullable();
+            $table->string('doc_086')->nullable();
+            $table->string('doc_063')->nullable();
+            $table->string('quota')->nullable();
+            $table->string('pdf_quota')->nullable();
+            $table->string('boy_reg')->nullable();
+            $table->string('status')->nullable();
+            $table->string('feadback')->nullable();
+            $table->boolean('isChecked')->nullable();
+
+
             $table->rememberToken();
             $table->timestamps();
 

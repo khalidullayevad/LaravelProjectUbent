@@ -20,7 +20,7 @@ class CreateSchoolCerteficatesTable extends Migration
             $table->string('school_name')->nullable();
             $table->integer('graduation_year')->nullable();
             $table->string('region')->nullable();
-            $table->string('pdf_sch_cer')->nullable();
+            $table->string('file')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

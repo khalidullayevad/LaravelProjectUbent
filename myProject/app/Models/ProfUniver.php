@@ -5,16 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class udastak extends Model
+class ProfUniver extends Model
 {
     use HasFactory;
-    protected $table="udastaks";
+    protected $table ='prof_univers';
     protected $fillable = [
-        'iin',
-        'birth_date',
-        'by_whom',
-        'file',
-        'nationality',
-        'user_id'
+        'univer_id',
+        'prof_id'
     ];
 }

@@ -15,7 +15,7 @@
     <div class="container" >
         <div style="float: left;">
             <img  @if($student->photo)
-                  src="{{asset('img')}}/{{$student->photo}}"
+                  src="{{asset('documents')}}/{{$student->photo}}"
                   @endif
                 alt="..." class="img-thumbnail mt-4" style="width: 250px; height: 250px">
             <table class="table table-hover mt-4" style="width: 250px;">
@@ -84,7 +84,7 @@
                         <input type="file" class="form-control-file" onchange="previewFile(this)" name="file" id="exampleFormControlFile1">
                         <img id="previewImg" alt="profile img"
                              @if($student->photo)
-                                 src="{{asset('img')}}/{{$student->photo}}"
+                                 src="{{asset('documents')}}/{{$student->photo}}"
                                  @endif
                              style="max-width: 130px;margin-top: 20px;"/>
                     </div>
@@ -144,7 +144,7 @@
                                class="form-control" id="inputAddress" placeholder="kazakh">
                     </div>
 
-                    @if($udastak && $udastak->pdf_udastak)
+                    @if($udastak && $udastak->file)
 
                         <div class="form-group pt-3 pb-1 pr-3 pl-3 " >
                             <label for="exampleFormControlFile1">Edit your identity card</label>
@@ -152,7 +152,7 @@
                         </div>
                         <div class="form-group pt-3 pb-1 pr-3 pl-3 " >
                             <label for="exampleFormControlFile1">Download your document</label>
-                            <a href="/downloadUdastak/{{$udastak->pdf_udastak}}">Dowload</a>
+                            <a href="/download/{{$udastak->file}}">Dowload</a>
                         </div>
                         <div class="form-group pt-3 pb-1 pr-3 pl-3 " >
                             <label for="exampleFormControlFile1">View your document</label>
@@ -216,7 +216,9 @@
                     </div>
                 <div class="pt-4">
                     <div class="custom-control custom-radio custom-control-inline pl-7 ">
-                        <input type="radio" id="customRadioInline1" value ="golden" name="type" class="custom-control-input">
+                        <input type="radio" id="customRadioInline1"  value="golden"
+
+                               name="type" class="custom-control-input">
                         <label class="custom-control-label" for="customRadioInline1">Golden medal</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
@@ -228,11 +230,27 @@
                         <label class="custom-control-label" for="customRadioInline2">Blue certificate </label>
                     </div>
                 </div>
+                    @if($sch_cer && $sch_cer->file)
 
-                    <div class="form-group pt-5 pb-1 pr-3 pl-2 " >
-                        <label for="exampleFormControlFile1">Upload your certification</label>
-                        <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
-                    </div>
+                        <div class="form-group pt-3 pb-1 pr-3 pl-3 " >
+                            <label for="exampleFormControlFile1">Edit your certeficate</label>
+                            <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
+                        <div class="form-group pt-3 pb-1 pr-3 pl-3 " >
+                            <label for="exampleFormControlFile1">Download your document</label>
+                            <a href="/download/{{$sch_cer->file}}">Dowload</a>
+                        </div>
+                        <div class="form-group pt-3 pb-1 pr-3 pl-3 " >
+                            <label for="exampleFormControlFile1">View your document</label>
+                            <a href="/viewSchCer/{{$sch_cer->id}}">View</a>
+                        </div>
+
+                    @else
+                        <div class="form-group pt-3 pb-1 pr-3 pl-3 " >
+                            <label for="exampleFormControlFile1">Upload your identity card</label>
+                            <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
+                    @endif
                     <div style="margin-left: 260px;: center; width: 200px;">
                         <button type="submit" class="btn1 mt-3 mb-3 ">Send</button>
                     </div>
@@ -249,10 +267,16 @@
             <form action="/editENTCerteficate" method="POST" enctype="multipart/form-data">
                 @csrf
             <h4 class="pt-3 pb-3" style="text-align: center">ENT</h4>
+                @if(Session::has('danger'))
+                    <div class="alert alert-danger" role="alert">
+                        {{Session::get('danger')}}
+                    </div>
+
+                @endif
             <div class="form-group row">
                 <label for="inputPassword" class="col col-form-label">Oku sauattylik</label>
                 <div class="col">
-                    <input type="number" name="reading" min="0" max="20"
+                    <input type="number" name="reading" required min="0" max="20"
                            @if($ents && $ents->reading)
                            value="{{$ents->reading}}"
                            @endif
@@ -266,13 +290,13 @@
                            @if($ents && $ents->math)
                            value="{{$ents->math}}"
                            @endif
-                           name="math" min="0" max="20" class="form-control" id="inputPassword" placeholder="20" style="width:150px; ">
+                           name="math" min="0" max="20"required class="form-control" id="inputPassword" placeholder="20" style="width:150px; ">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputPassword" class="col col-form-label">History of Kazakhstan</label>
                 <div class="col">
-                    <input type="number"
+                    <input type="number" required
                            @if($ents && $ents->history)
                            value="{{$ents->history}}"
                            @endif
@@ -280,7 +304,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <select name="subject_1_name" class="custom-select col-lg-5 mr-5 ml-3" id="inlineFormCustomSelect" >
+                <select name="subject_1_name"  required class="custom-select col-lg-5 mr-5 ml-3" id="inlineFormCustomSelect" >
                     <option selected>First subject</option>
                     <option value="Mathematic">Mathematic</option>
                     <option value="Phisics">Phisics</option>
@@ -291,43 +315,60 @@
                            @if($ents && $ents->subject_1_point)
                            value="{{$ents->subject_1_point}}"
                            @endif
-                           name="subject_1_point" min="0" max="40" class="form-control" id="inputPassword" placeholder="40" style="width:150px; ">
+                           name="subject_1_point" required min="0" max="40" class="form-control" id="inputPassword" placeholder="40" style="width:150px; ">
                 </div>
             </div>
             <div class="form-group row">
-                <<select name="subject_2_name" class="custom-select col-lg-5 mr-5 ml-3" id="inlineFormCustomSelect" >
+                <select name="subject_2_name" required class="custom-select col-lg-5 mr-5 ml-3" id="inlineFormCustomSelect" >
                     <option selected>First subject</option>
                     <option value="Mathematic">Mathematic</option>
                     <option value="Phisics">Phisics</option>
                     <option value="Geography">Geography</option>
                 </select>
                 <div class="col">
-                    <input type="number"
+                    <input type="number" required
                            @if($ents && $ents->subject_2_point)
                            value="{{$ents->subject_2_point}}"
                            @endif
-                           name="subject_1_point" min="0" max="40" class="form-control" id="inputPassword" placeholder="40" style="width:150px; ">
+                           name="subject_2_point" min="0" max="40" class="form-control" id="inputPassword" placeholder="40" style="width:150px; ">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputAddress">Сertificate TJK </label>
-                <input type="text"
+                <input type="text" required
                        @if($ents && $ents->tjk)
                        value="{{$ents->tjk}}"
                        @endif
                        name="tjk" class="form-control" id="inputAddress" placeholder="12345678">
             </div>
-            <<select name="language" class="custom-select col-lg-5 mr-5 ml-3" id="inlineFormCustomSelect" >
+            <select name="language" required class="custom-select col-lg-5 mr-5 ml-3" id="inlineFormCustomSelect" >
                 <option selected>Language</option>
                 <option value="kz">Kazakh</option>
                 <option value="ru">Russian</option>
                 <option value="eng">English</option>
             </select>
 
-                <div class="form-group pt-3 pb-1" >
-                    <label for="exampleFormControlFile1">Upload your certificate</label>
-                    <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
-                </div>
+                @if($ents && $ents->file)
+
+                    <div class="form-group pt-3 pb-1 pr-3 pl-3 " >
+                        <label for="exampleFormControlFile1">Edit your certeficate</label>
+                        <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+                    <div class="form-group pt-3 pb-1 pr-3 pl-3 " >
+                        <label for="exampleFormControlFile1">Download your document</label>
+                        <a href="/download/{{$ents->file}}">Dowload</a>
+                    </div>
+                    <div class="form-group pt-3 pb-1 pr-3 pl-3 " >
+                        <label for="exampleFormControlFile1">View your document</label>
+                        <a href="/viewEnt/{{$ents->id}}">View</a>
+                    </div>
+
+                @else
+                    <div class="form-group pt-3 pb-1 pr-3 pl-3 " >
+                        <label for="exampleFormControlFile1">Upload your identity card</label>
+                        <input type="file" name="file" required class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+                @endif
                 <div style="margin-left: 260px;: center; width: 200px;">
                     <button type="submit" class="btn1 mt-3 mb-3 ">Send</button>
                 </div>
@@ -339,7 +380,12 @@
 
 
         <div class="mt-3 pb-3 pl-3 pt-3 pr-3" style="border: 1px solid lightgrey">
-            <form>
+            <form action="/editOtherDocFiles" method="POST" enctype="multipart/form-data">
+                @csrf
+
+                @if($student->doc_086)
+                    <a href="/viewOther">View my doc files</a>
+                @endif
                 <div class="form-group pt-3 pb-1" >
                     <div class="row">
                         <div class="col">
@@ -347,73 +393,57 @@
                                 this year</label>
                         </div>
                         <div class="col">
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                            <input type="file" name="086" class="form-control-file" id="exampleFormControlFile1">
                         </div>
                     </div>
                 </div>
                 <hr>
-            </form>
 
 
-            <form>
+
+
                 <div class="form-group pt-3 pb-1" >
                     <div class="row">
                         <div class="col">
                             <label for="exampleFormControlFile1">vaccination card (form 063, or child health passport)</label>
                         </div>
                         <div class="col">
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                            <input type="file" name="063" required class="form-control-file" id="exampleFormControlFile1">
                         </div>
                     </div>
                 </div>
                 <hr>
-            </form>
-            <form>
+
+
                 <div class="form-group pt-3 pb-1" >
                     <div class="row">
                         <div class="col">
                             <label for="exampleFormControlFile1">certificate of registration (for boys)</label>
                         </div>
                         <div class="col">
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                            <input type="file" name="boy_reg" required class="form-control-file" id="exampleFormControlFile1">
                         </div>
                     </div>
                 </div>
                 <hr>
-            </form>
-            <form>
-            <div class="form-group pt-3 pb-1" >
-                <div class="row">
-                    <div class="col">
-                        <label for="exampleFormControlFile1">*If have IELTS </label>
-                    </div>
-                    <div class="col">
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                    </div>
-                </div>
-            </div>
 
-            <hr>
 
             <h4 class="pt-4" style="font-weight: lighter; ">*If you have quota</h4>
 
             <div class="form-group row">
-                <select class="custom-select col-lg-5 mr-5 ml-3" id="inlineFormCustomSelect" >
-                    <option selected>Quota</option>
+                <select name="quota" class="custom-select col-lg-5 mr-5 ml-3" id="inlineFormCustomSelect" >
+                    <option value="" selected>Quota</option>
                     <option value="1">Quota for orphans</option>
                     <option value="2">Disabled quota</option>
                     <option value="3">WWII quota</option>
                     <option value="4">Quota for Kazakh nationalities who are not citizens of the Republic of Kazakhstan</option>
                 </select>
                 <div class="col">
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    <input type="file" name="pdf_quota" class="form-control-file" id="exampleFormControlFile1">
                 </div>
             </div>
-
-
-
             <div style="margin-left: 260px;: center; width: 250px;">
-                <button type="button" class="btn1 mt-3 mb-3 ">Send</button>
+                <button type="submit" class="btn1 mt-3 mb-3 ">Send</button>
             </div>
             </form>
         </div>

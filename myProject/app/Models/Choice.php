@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Choice extends Model
 {
     use HasFactory;
-    public function unverProf()
-    {
-        return $this->belongsTo('App\Models\UniverProf');
-    }
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User');
-    }
+    protected $table = 'choices';
+    protected $fillable = [
+        'user_id',
+        'firth',
+        'second',
+        'third',
+        'fourth'
+    ];
 }

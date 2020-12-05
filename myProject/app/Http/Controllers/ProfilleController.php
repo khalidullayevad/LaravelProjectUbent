@@ -41,7 +41,7 @@ class ProfilleController extends Controller
         }
         $image =$request->file('file');
         $imageName =time().'.'.$image->extension();
-        $image->move(public_path('img'),$imageName);
+        $image->move(public_path('documents'),$imageName);
         DB::table('users')
             ->where('id', $request -> input('id'))
             ->update(array('full_name' =>$request -> input('full_name'),
@@ -52,18 +52,64 @@ class ProfilleController extends Controller
         return redirect()->route('profile');
     }
 
+    public function postOtherDoc(Request $request){
+        if($doc1 =$request->file('086')) {
+            $doc1 = $request->file('086');
+            $doc1Name = time() . '.' . $doc1->extension();
+            $doc1->move(public_path('documents'), $doc1Name);
+        }
+        if($doc1 =$request->file('063')) {
+            $doc2 = $request->file('063');
+            $doc2Name = time() . '.' . $doc2->extension();
+            $doc2->move(public_path('documents'), $doc2Name);
+        }
+        if($doc1 =$request->file('boy_reg')) {
+            $doc3 = $request->file('boy_reg');
+            $doc3Name = time() . '.' . $doc2->extension();
+            $doc3->move(public_path('documents'), $doc3Name);
+        }
+
+        if($doc1 =$request->file('pdf_quota')) {
+
+            $doc4 = $request->file('pdf_quota');
+            $doc4Name = time() . '.' . $doc2->extension();
+            $doc4->move(public_path('documents'), $doc4Name);
+            $quota = $request->input('quota');
+        }
+
+        if ($request -> input('quota')==""){
+            $quota=null;
+        }
+
+
+        DB::table('users')
+            ->where('id', Auth::id())
+            ->update(array('quota' =>$quota,
+                    'doc_086'=>$doc1Name,
+                    'doc_063' =>$doc2Name,
+                    'pdf_quota'=>$doc4Name,
+                    'boy_reg'=>$doc3Name
+                )
+            );
+
+
+
+        return redirect()->route('profile');
+
+    }
+
     public function postUdastak(Request $request){
         $udastak = DB::table('udastaks')->where('user_id', Auth::id())->first();
         $image =$request->file('file');
         $imageName =time().'.'.$image->extension();
-        $image->move(public_path('img'),$imageName);
+        $image->move(public_path('documents'),$imageName);
         if($udastak){
             DB::table('udastaks')
                 ->where('user_id', Auth::id())
                 ->update(array('iin' =>$request -> input('iin'),
                         'birth_date' =>$request -> input('birth_date'),
                         'by_whom' =>$request -> input('by_whom'),
-                        'pdf_udastak' =>$imageName,
+                        'file' =>$imageName,
                         'nationality'=> $request -> input('nationality')
                     )
                 );
@@ -73,7 +119,7 @@ class ProfilleController extends Controller
                     'iin' =>$request -> input('iin'),
                     'birth_date' =>$request -> input('birth_date'),
                     'by_whom' =>$request -> input('by_whom'),
-                    'pdf_udastak' =>$imageName,
+                    'file' =>$imageName,
                     'nationality'=> $request -> input('nationality'),
                     'user_id'=>Auth::id()
                 ]
@@ -87,7 +133,7 @@ class ProfilleController extends Controller
         $school_certeficates = DB::table('school_certeficates')->where('user_id', Auth::id())->first();
         $image =$request->file('file');
         $imageName =time().'.'.$image->extension();
-        $image->move(public_path('img'),$imageName);
+        $image->move(public_path('documents'),$imageName);
         if($school_certeficates){
             DB::table('school_certeficates')
                 ->where('user_id', Auth::id())
@@ -96,7 +142,7 @@ class ProfilleController extends Controller
                         'school_name' =>$request -> input('school_name'),
                         'graduation_year' =>$request -> input('graduation_year'),
                         'region' =>$request -> input('region'),
-                        'pdf_sch_cer' =>$imageName,
+                        'file' =>$imageName,
                         'user_id'=>Auth::id()
 
                     )
@@ -109,7 +155,7 @@ class ProfilleController extends Controller
                         'school_name' =>$request -> input('school_name'),
                         'graduation_year' =>$request -> input('graduation_year'),
                         'region' =>$request -> input('region'),
-                        'pdf_sch_cer' =>$imageName,
+                        'file' =>$imageName,
                         'user_id'=>Auth::id()
 
                 ]
@@ -119,13 +165,20 @@ class ProfilleController extends Controller
     }
 
     public function postENTCer(Request $request){
+        if($request -> input('reading')==null || $request -> input('math')==null||
+        $request -> input('history')==null ||$request -> input('subject_1_point')==null ||$request -> input('subject_2_point')==null ){
+            return redirect()
+                -> route('profile')
+                -> with('danger','Enter all datas ');
+        }
+
         $total =$request -> input('reading') +$request -> input('math')+$request -> input('history')+$request -> input('subject_1_point')+$request -> input('subject_2_point');
 
 
         $e_n_t_s = DB::table('e_n_t_s')->where('user_id', Auth::id())->first();
         $image =$request->file('file');
         $imageName =time().'.'.$image->extension();
-        $image->move(public_path('img'),$imageName);
+        $image->move(public_path('documents'),$imageName);
         if($e_n_t_s){
             DB::table('e_n_t_s')
                 ->where('user_id', Auth::id())
@@ -139,7 +192,7 @@ class ProfilleController extends Controller
                         'total' =>$total,
                         'tjk' =>$request -> input('tjk'),
                         'language' =>$request -> input('language'),
-                        'pdf_ent' =>$imageName,
+                        'file' =>$imageName,
                         'user_id'=>Auth::id()
 
                     )
@@ -157,13 +210,13 @@ class ProfilleController extends Controller
                    'total' =>$total,
                    'tjk' =>$request -> input('tjk'),
                    'language' =>$request -> input('language'),
-                   'pdf_ent' =>$imageName,
+                   'file' =>$imageName,
                    'user_id'=>Auth::id()
 
                 ]
             );
         }
-        return  redirect()->route('profile');
+        return  redirect()->route('profile') -> with('danger',' Success input datas');;
 
     }
 }

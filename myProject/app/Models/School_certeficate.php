@@ -15,7 +15,7 @@ class School_certeficate extends Model
         'school_name',
         'graduation_year',
         'region',
-        'pdf_sch_cer',
+        'file',
         'user_id',
 
     ];

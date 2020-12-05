@@ -8,12 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class University extends Model
 {
     use HasFactory;
-    public function Profession()
-    {
-        return $this->belongsToMany('App\Models\Profession');
-    }
-    public function univerProf()
-    {
-        return $this->belongsTo('App\Models\UniverProf');
-    }
+
+    protected $table ='professions';
+    protected $fillable = [
+        'name',
+        'city'
+
+    ];
 }

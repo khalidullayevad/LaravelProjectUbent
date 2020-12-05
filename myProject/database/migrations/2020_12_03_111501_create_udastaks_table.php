@@ -19,7 +19,7 @@ class CreateUdastaksTable extends Migration
             $table->string('iin')->nullable();
             $table->date('birth_date')->nullable();
             $table->string('by_whom')->nullable();
-            $table->string('pdf_udastak')->nullable();
+            $table->string('file')->nullable();
             $table->string('nationality')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

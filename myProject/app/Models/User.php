@@ -18,7 +18,15 @@ class User extends Authenticatable
         'password',
         'full_name',
         'gender',
-        'photo'
+        'photo',
+        'status',
+        'doc_063',
+        'doc_086',
+        'boy_reg',
+        'quota',
+        'pdf_quota',
+        'feadback',
+        'isChecked'
     ];
 
 
