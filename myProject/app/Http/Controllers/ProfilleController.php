@@ -52,27 +52,40 @@ class ProfilleController extends Controller
         return redirect()->route('profile');
     }
 
+
     public function postOtherDoc(Request $request){
-        if($doc1 =$request->file('086')) {
+
+        if($request->file('086')) {
+
             $doc1 = $request->file('086');
+
             $doc1Name = time() . '.' . $doc1->extension();
+
             $doc1->move(public_path('documents'), $doc1Name);
+
+
         }
-        if($doc1 =$request->file('063')) {
+        if($request->file('063')) {
+
             $doc2 = $request->file('063');
             $doc2Name = time() . '.' . $doc2->extension();
             $doc2->move(public_path('documents'), $doc2Name);
         }
-        if($doc1 =$request->file('boy_reg')) {
+
+        if($request->file('boy_reg')) {
+
             $doc3 = $request->file('boy_reg');
-            $doc3Name = time() . '.' . $doc2->extension();
+
+            $doc3Name = time() . '.' . $doc3->extension();
+
             $doc3->move(public_path('documents'), $doc3Name);
+
         }
 
-        if($doc1 =$request->file('pdf_quota')) {
+        if($request->file('pdf_quota')) {
 
             $doc4 = $request->file('pdf_quota');
-            $doc4Name = time() . '.' . $doc2->extension();
+            $doc4Name = time() . '.' . $doc4->extension();
             $doc4->move(public_path('documents'), $doc4Name);
             $quota = $request->input('quota');
         }
@@ -91,6 +104,8 @@ class ProfilleController extends Controller
                     'boy_reg'=>$doc3Name
                 )
             );
+
+
 
 
 

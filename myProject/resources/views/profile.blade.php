@@ -380,12 +380,9 @@
 
 
         <div class="mt-3 pb-3 pl-3 pt-3 pr-3" style="border: 1px solid lightgrey">
-            <form action="/editOtherDocFiles" method="POST" enctype="multipart/form-data">
+            <form action="/editDocFiles" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                @if($student->doc_086)
-                    <a href="/viewOther">View my doc files</a>
-                @endif
                 <div class="form-group pt-3 pb-1" >
                     <div class="row">
                         <div class="col">
@@ -408,7 +405,7 @@
                             <label for="exampleFormControlFile1">vaccination card (form 063, or child health passport)</label>
                         </div>
                         <div class="col">
-                            <input type="file" name="063" required class="form-control-file" id="exampleFormControlFile1">
+                            <input type="file" name="063"  class="form-control-file" id="exampleFormControlFile1">
                         </div>
                     </div>
                 </div>
@@ -421,7 +418,7 @@
                             <label for="exampleFormControlFile1">certificate of registration (for boys)</label>
                         </div>
                         <div class="col">
-                            <input type="file" name="boy_reg" required class="form-control-file" id="exampleFormControlFile1">
+                            <input type="file" name="boy_reg"class="form-control-file" id="exampleFormControlFile1">
                         </div>
                     </div>
                 </div>

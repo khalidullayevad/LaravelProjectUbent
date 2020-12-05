@@ -46,7 +46,7 @@ Route::post('/editSchoolCerteficate', [ProfilleController::class, 'postSchCer'])
 Route::post('/editENTCerteficate', [ProfilleController::class, 'postENTCer']);
 
 
-Route::post('/editOtherDocFiles', [ProfilleController::class, 'postOtherDoc']);
+Route::post('/editDocFiles', [ProfilleController::class, 'postOtherDoc']);
 
 Route::get('/viewUdastak/{id}',[DocumentController::class,'viewUdastak']);
 
