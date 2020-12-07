@@ -9,10 +9,9 @@ class University extends Model
 {
     use HasFactory;
 
-    protected $table ='professions';
+    protected $table ='universities';
     protected $fillable = [
         'name',
         'city'
-
     ];
 }

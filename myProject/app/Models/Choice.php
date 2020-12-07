@@ -11,7 +11,7 @@ class Choice extends Model
     protected $table = 'choices';
     protected $fillable = [
         'user_id',
-        'firth',
+        'first',
         'second',
         'third',
         'fourth'

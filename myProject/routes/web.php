@@ -58,3 +58,12 @@ Route::get('/download/{file}',[DocumentController::class,'download']);
 Route::get('/viewSchCer/{id}',[DocumentController::class,'viewScholCer']);
 
 Route::get('/viewEnt/{id}',[DocumentController::class,'viewEnt']);
+
+Route::get('/contacts', [HomeController::class, 'contacts'])->name('contacts');
+Route::get('/choice', [ProfilleController::class, 'choice'])->name('choice');
+Route::get('/status', [ProfilleController::class, 'status'])->name('status');
+
+//Ajax
+Route::get('/get_profs', [ProfilleController::class, 'get_profs']);
+Route::post('/save_choices', [ProfilleController::class, 'save_choices']);
+

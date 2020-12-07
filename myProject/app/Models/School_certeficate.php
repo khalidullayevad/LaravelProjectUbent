@@ -17,6 +17,5 @@ class School_certeficate extends Model
         'region',
         'file',
         'user_id',
-
     ];
 }

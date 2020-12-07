@@ -13,38 +13,8 @@
 
 <section >
     <div class="container" >
-        <div style="float: left;">
-            <img  @if($student->photo)
-                  src="{{asset('documents')}}/{{$student->photo}}"
-                  @endif
-                alt="..." class="img-thumbnail mt-4" style="width: 250px; height: 250px">
-            <table class="table table-hover mt-4" style="width: 250px;">
-                <thead>
-                <tr>
-                    <th scope="col"> @if($student->full_name)
-                          {{$student->full_name}}"
-                        @endif
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td><a href="profile.html" style="text-decoration: none; color:rgb(0,223,195) "> Profile </a></td>
-                </tr>
-                <tr>
-                    <td><a href="choose.html" style="text-decoration: none; color:rgb(0,223,195) "> My chooses</a></td>
-                </tr>
 
-                <tr>
-                    <td colspan="2"><a href="status.html" style="text-decoration: none;color:rgb(0,223,195) "> Status</a></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><a href="#" style="text-decoration: none; color:rgb(0,223,195) "> Messages</a></td>
-                </tr>
-
-                </tbody>
-            </table>
-        </div>
+        @include('templates/menu')
 
         <div class = "mt-4"style="float:right; width: 800px; border: 1px solid lightgrey;">
             <div class="pl-4 pr-4 pt-4">
@@ -67,8 +37,8 @@
                     </div>
                     <div class="custom-control custom-radio custom-control-inline pl-7 ">
                         <input type="radio" id="gender1" value="M" name="gender" class="custom-control-input"
-                        @if ($student -> gender && $student -> gender==true )
-                            checked
+                            @if ($student -> gender && $student -> gender==true )
+                               checked
                             @endif>
                         <label class="custom-control-label" for="gender1">Male</label>
                     </div>

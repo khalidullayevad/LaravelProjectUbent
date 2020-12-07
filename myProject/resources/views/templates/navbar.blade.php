@@ -4,7 +4,7 @@
         <img style = "margin-left:35px; float: left;"src="./img/iitu_logo.png">
         <li><a href="{{route('home')}}">Home</a></li>
         <li><a href="instruction.html">Instruction</a></li>
-        <li><a href="contact.html">Contacts</a></li>
+        <li><a href="{{route('contacts')}}">Contacts</a></li>
         @if(Auth::check())
         <li><a href="{{route('profile')}}">{{Auth::user()->getEmailOrName()}}</a></li>
             <li><a href="{{route('signout')}}">Sign Out</a></li>
