@@ -331,4 +331,14 @@ class ProfilleController extends Controller
         $universities = University::all();
         return view('myChoices', ['universities'=>$universities, 'student'=>$student]);
     }
+
+    public function status(){
+        $student = DB::table('users')->where('id', Auth::id())->first();
+        return view('myStatus', ['student'=>$student]);
+    }
+
+    public function messages(){
+        $student = DB::table('users')->where('id', Auth::id())->first();
+        return view('messages', ['student'=>$student]);
+    }
 }

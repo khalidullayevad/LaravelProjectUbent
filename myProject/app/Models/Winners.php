@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Winners extends Model
 {
     use HasFactory;
-    public function unverProf()
-    {
-        return $this->belongsTo('App\Models\UniverProf');
-    }
+    protected $table ='winners';
+    protected $fillable = [
+        'user_id',
+        'prof_univer_id'
+    ];
 }

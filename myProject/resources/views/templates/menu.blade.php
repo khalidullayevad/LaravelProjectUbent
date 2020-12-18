@@ -24,7 +24,7 @@
             <td colspan="2"><a href="{{route('status')}}" style="text-decoration: none;color:rgb(0,223,195) "> Status</a></td>
         </tr>
         <tr>
-            <td colspan="2"><a href="#" style="text-decoration: none; color:rgb(0,223,195) "> Messages</a></td>
+            <td colspan="2"><a href="{{route('messages')}}" style="text-decoration: none; color:rgb(0,223,195) "> Messages</a></td>
         </tr>
 
         </tbody>
